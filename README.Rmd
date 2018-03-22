@@ -36,7 +36,7 @@ library(gshhg)
 gshhg_get(version = "2.3.7")
 ```
 
-```{r }
+```{r message=FALSE, warning=FALSE, results='hide'}
 library(sf)
 
 dt <- st_read(
