@@ -25,6 +25,17 @@ You can install gshhg from github with:
 devtools::install_github("jsta/gshhg")
 ```
 
+## Usage
+
+```{r eval=TRUE}
+library(gshhg)
+```
+
+```{r eval=FALSE}
+# Download raw data
+gshhg_get(version = "2.3.7")
+```
+
 ## References
 
 See http://www.soest.hawaii.edu/pwessel/gshhg/
