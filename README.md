@@ -51,19 +51,31 @@ bb <- st_sfc(st_polygon(list(rbind(c(-6.46, 49.696),
                              c(2.417, 50.18), 
                              c(-6.46, 49.696)))), crs = 4326)
 
-get_britain <- function(dt){
+get_within <- function(dt, bb){
   dt[sapply(st_within(dt, bb), 
                         function(x) length(x) > 0),]
 }
 
 dt_britain <- lapply(list(dt_i, dt_l, dt_c), 
-                     function(x) get_britain(x))
+                     function(x) get_within(x, bb))
 
 par(mfrow = c(1, 3))
 lapply(dt_britain, function(x) plot(st_geometry(x)))
 ```
 
 ![](README-unnamed-chunk-4-1.png)
+
+### What is the lake coverage like?
+
+``` r
+lake_f <- st_read(
+  list.files(file.path(gshhg:::cache_path(), "2.3.7", "GSHHS_shp", "f"), 
+             pattern = "L2.shp", full.names = TRUE, include.dirs = TRUE))
+
+mapview::mapview(lake_f[which.min(lake_f$area),])
+```
+
+![](smallest_lake.png)
 
 References
 ----------
